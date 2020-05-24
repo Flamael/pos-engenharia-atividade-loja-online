@@ -31,9 +31,9 @@ public class Venda {
     }
 
     public void finalizarCompra() {
-        for (Automovel automovel : automoveis) {
+        automoveis.forEach(automovel -> {
             System.out.println(automovel.toString());
-        }
+        });
 
         int valorTotal = automoveis
                 .stream()

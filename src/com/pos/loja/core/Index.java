@@ -34,7 +34,7 @@ public class Index {
             Map<String, List<Object>> data = connection.selectAll();
 
             //ações do banco de dados
-            //cria um automovel e um clinete
+            //cria um automovel e um cliente
             int idAutomovel = connection.salvar((AutomovelFactory.spyMoto(30, 164, 45, 4500, "Pink", "cc", "Yamara", "Alcool")));
             int idCliente = connection.salvar(ClienteFactory.spyCliente("Leonardo", "135468784"));
             //seleciona cliente a partir do id e salva uma nova venda
@@ -45,30 +45,27 @@ public class Index {
             connection.salvar(novaVenda);
 
             System.out.println("================= EXTRATO DE VENDAS ====================");
-
             List<Venda> vendas = data.get("Venda")
                     .stream()
                     .filter(Venda.class::isInstance)
                     .map(Venda.class::cast)
                     .collect(Collectors.toList());
 
-            for (Venda venda : vendas) {
+            vendas.forEach(venda -> {
                 System.out.println("---------- " + venda.getCliente().getNome() + " -----------");
-
-                for (Automovel automovel : venda.getAutomoveis()) {
+                venda.getAutomoveis().forEach(automovel -> {
                     Motor motor = (Motor) automovel;
                     System.out.println("Automovel: " + automovel.getModelo() + " - Verificar estado do mortor....");
-                    Thread.sleep(1000);//"Ajuste técnico" pra mostrar delay legalzinho antes de finalizar
+                    try {
+                        Thread.sleep(1000);//"Ajuste técnico" pra mostrar delay legalzinho antes de finalizar *-*
+                    } catch (InterruptedException ex) {
+                    }
                     motor.verificarEstadoDoMotor();
-                }
-                System.out.println();
-
+                });
                 venda.finalizarCompra();
                 System.out.println("=====================================");
-            }
-
-            System.out.println();
-        } catch (InterruptedException e) {
+            });
+        } catch (Exception e) {
             System.err.println(e);
         }
     }
