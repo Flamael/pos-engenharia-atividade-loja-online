@@ -40,7 +40,7 @@ public class Database {
         return 0;
     }
 
-    public Object index(String table, int id) {
+    public Object findById(String table, int id) {
         return data.get(table).get(id);
     }
 }

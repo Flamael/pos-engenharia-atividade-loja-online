@@ -38,8 +38,8 @@ public class Index {
             int idAutomovel = connection.salvar((AutomovelFactory.spyMoto(30, 164, 45, 4500, "Pink", "cc", "Yamara", "Alcool")));
             int idCliente = connection.salvar(ClienteFactory.spyCliente("Leonardo", "135468784"));
             //seleciona cliente a partir do id e salva uma nova venda
-            Venda novaVenda = VendaFactory.spyVenda(connection.index("Cliente", idCliente));
-            novaVenda.addAutomovel((Automovel) connection.index("Automovel", idAutomovel));
+            Venda novaVenda = VendaFactory.spyVenda(connection.findById("Cliente", idCliente));
+            novaVenda.addAutomovel((Automovel) connection.findById("Automovel", idAutomovel));
             novaVenda.setFormaDePagamento("Crédito");
             //cria uma venda com a conexão
             connection.salvar(novaVenda);
