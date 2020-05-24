@@ -10,5 +10,5 @@ package com.pos.loja.interfaces;
  * @author felip
  */
 public interface Motor {
-    void condicoesDeUso(String condicao);  
+    void verificarEstadoDoMotor();  
 }
