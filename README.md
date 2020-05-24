@@ -5,7 +5,7 @@
 
 ```bash
   - Felipe Henrique Ferraresi
-  - Bruno Cardoso
+  - Bruno Cardoso Ribeiro Pontes
   - Ranniery Marcelino de Lima
 ```
 
