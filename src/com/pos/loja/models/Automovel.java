@@ -22,6 +22,11 @@ public abstract class Automovel {
         this.preco = preco;
         this.potencia = potencia;
         this.quilometragem = quilometragem;
+        this.cor = cor;
+        this.tipoPotencia = tipoPotencia;
+        this.modelo = modelo;
+        this.combustivel = combustivel;
+        
     }
 
     public int getAno() {
