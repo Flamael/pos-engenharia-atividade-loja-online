@@ -9,7 +9,8 @@ import com.pos.loja.interfaces.Motor;
 import com.pos.loja.models.Automovel;
 import java.util.List;
 import java.util.Map;
-import com.pos.loja.models.Database;
+import com.pos.loja.config.Database;
+import com.pos.loja.factories.ClienteFactory;
 import com.pos.loja.models.Venda;
 import java.util.stream.Collectors;
 
@@ -22,14 +23,21 @@ public class Index {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) { 
+    public static void main(String[] args) {
         try {
-            Database db = new Database();
-            Map<String, List<Object>> data = db.getData();
-
+            
+            //Conexão com banco de dados
+            Database connection = new Database();
+            //seleciona todos os itens da base
+            Map<String, List<Object>> data = connection.selectAll();
+            
+            connection.salvar(ClienteFactory.spyVenda("cicim", "135468784"));
+            
+            
+            
             System.out.println("================= EXTRATO DE VENDAS ====================");
 
-            List<Venda> vendas = data.get("Vendas")
+            List<Venda> vendas = data.get("com.pos.loja.models.Venda")
                     .stream()
                     .filter(Venda.class::isInstance)
                     .map(Venda.class::cast)
