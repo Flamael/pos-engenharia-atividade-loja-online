@@ -14,16 +14,33 @@ public class Database {
          * ******************* MOCK DADOS INICIAIS *************************
          */
         System.out.println("Rodando seed com dados iniciais...");
-        data.put("com.pos.loja.models.Cliente", Mock.clientes());
-        data.put("com.pos.loja.models.Automovel", Mock.automoveis());
-        data.put("com.pos.loja.models.Venda", Mock.vendas());
+        data.put("Cliente", Mock.clientes());
+        data.put("Automovel", Mock.automoveis());
+        data.put("Venda", Mock.vendas());
     }
 
     public Map<String, List<Object>> selectAll() {
         return data;
     }
 
-    public void salvar(Object item) { 
-        data.get(item.getClass().getName()).add(item);
+    public int salvar(Object item) {
+        List<Object> table = null;
+        try {
+            table = data.get(item.getClass().getSimpleName());
+            table.add(item);
+            return table.size() - 1;
+        } catch (NullPointerException ex) {
+            table = data.get(item.getClass().getSuperclass().getSimpleName());
+        } finally {
+            if (table != null) {
+                table.add(item);
+                return table.size() - 1;
+            }
+        }
+        return 0;
+    }
+
+    public Object index(String table, int id) {
+        return data.get(table).get(id);
     }
 }

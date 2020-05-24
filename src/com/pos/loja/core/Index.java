@@ -10,7 +10,9 @@ import com.pos.loja.models.Automovel;
 import java.util.List;
 import java.util.Map;
 import com.pos.loja.config.Database;
+import com.pos.loja.factories.AutomovelFactory;
 import com.pos.loja.factories.ClienteFactory;
+import com.pos.loja.factories.VendaFactory;
 import com.pos.loja.models.Venda;
 import java.util.stream.Collectors;
 
@@ -25,19 +27,26 @@ public class Index {
      */
     public static void main(String[] args) {
         try {
-            
+
             //Conexão com banco de dados
             Database connection = new Database();
-            //seleciona todos os itens da base
+            //selecionar todos os itens da base
             Map<String, List<Object>> data = connection.selectAll();
-            
-            connection.salvar(ClienteFactory.spyVenda("cicim", "135468784"));
-            
-            
-            
+
+            //ações do banco de dados
+            //cria um automovel e um clinete
+            int idAutomovel = connection.salvar((AutomovelFactory.spyMoto(30, 164, 45, 4500, "Pink", "cc", "Yamara", "Alcool")));
+            int idCliente = connection.salvar(ClienteFactory.spyCliente("Leonardo", "135468784"));
+            //seleciona cliente a partir do id e salva uma nova venda
+            Venda novaVenda = VendaFactory.spyVenda(connection.index("Cliente", idCliente));
+            novaVenda.addAutomovel((Automovel) connection.index("Automovel", idAutomovel));
+            novaVenda.setFormaDePagamento("Crédito");
+            //cria uma venda com a conexão
+            connection.salvar(novaVenda);
+
             System.out.println("================= EXTRATO DE VENDAS ====================");
 
-            List<Venda> vendas = data.get("com.pos.loja.models.Venda")
+            List<Venda> vendas = data.get("Venda")
                     .stream()
                     .filter(Venda.class::isInstance)
                     .map(Venda.class::cast)
