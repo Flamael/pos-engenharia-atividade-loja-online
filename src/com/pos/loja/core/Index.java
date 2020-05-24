@@ -5,6 +5,8 @@
  */
 package com.pos.loja.core;
 
+import com.pos.loja.interfaces.Motor;
+import com.pos.loja.models.Automovel;
 import java.util.List;
 import java.util.Map;
 import com.pos.loja.models.Database;
@@ -20,8 +22,7 @@ public class Index {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic
+    public static void main(String[] args) { 
         try {
             Database db = new Database();
             Map<String, List<Object>> data = db.getData();
@@ -35,11 +36,22 @@ public class Index {
                     .collect(Collectors.toList());
 
             for (Venda venda : vendas) {
+                System.out.println("---------- " + venda.getCliente().getNome() + " -----------");
+
+                for (Automovel automovel : venda.getAutomoveis()) {
+                    Motor motor = (Motor) automovel;
+                    System.out.println("Automovel: " + automovel.getModelo() + " - Verificar estado do mortor....");
+                    Thread.sleep(1000);//"Ajuste técnico" pra mostrar delay legalzinho antes de finalizar
+                    motor.verificarEstadoDoMotor();
+                }
+                System.out.println();
+
                 venda.finalizarCompra();
+                System.out.println("=====================================");
             }
 
             System.out.println();
-        } catch (Exception e) {
+        } catch (InterruptedException e) {
             System.err.println(e);
         }
     }
