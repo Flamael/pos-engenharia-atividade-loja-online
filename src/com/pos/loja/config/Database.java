@@ -24,23 +24,26 @@ public class Database {
     }
 
     public int salvar(Object item) {
-        List<Object> table = null;
+
         try {
-            table = data.get(item.getClass().getSimpleName());
-            table.add(item);
-            return table.size() - 1;
+            List<Object> tabela = null;
+            String nomeTable = item.getClass().getSimpleName();
+            //verficar se tem parente/herança
+            if (!data.keySet().contains(nomeTable)) {
+                String nomeParente = item.getClass().getSuperclass().getSimpleName();
+                tabela = data.get(nomeParente);
+            }else{
+                tabela = data.get(item.getClass().getSimpleName());
+            }           
+            
+            tabela.add(item);
+            return tabela.size() - 1;
         } catch (NullPointerException ex) {
-            table = data.get(item.getClass().getSuperclass().getSimpleName());
-        } finally {
-            if (table != null) {
-                table.add(item);
-                return table.size() - 1;
-            }
+            return 0;
         }
-        return 0;
     }
 
-    public Object findById(String table, int id) {
-        return data.get(table).get(id);
+    public Object findById(String tabela, int id) {
+        return data.get(tabela).get(id);
     }
 }
