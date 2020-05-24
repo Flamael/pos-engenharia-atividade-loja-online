@@ -14,7 +14,7 @@ import com.pos.loja.models.Venda;
  */
 public class ClienteFactory {
 
-    public static Cliente spyVenda(String nome, String cpf) {
+    public static Cliente spyCliente(String nome, String cpf) {
         return new Cliente(nome, cpf);
     }
 }

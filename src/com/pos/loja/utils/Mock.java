@@ -23,9 +23,9 @@ public class Mock {
 
     public static List<Object> clientes() {
         List<Object> clientes = new ArrayList<>();
-        clientes.add(ClienteFactory.spyVenda("Ranniery", "135464231"));
-        clientes.add(ClienteFactory.spyVenda("Felipe", "45646786"));
-        clientes.add(ClienteFactory.spyVenda("Bruno", "87854212"));
+        clientes.add(ClienteFactory.spyCliente("Ranniery", "135464231"));
+        clientes.add(ClienteFactory.spyCliente("Felipe", "45646786"));
+        clientes.add(ClienteFactory.spyCliente("Bruno", "87854212"));
         return clientes;
     }
 
