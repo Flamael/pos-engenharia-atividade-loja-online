@@ -16,8 +16,8 @@ public class Caminhao extends Automovel implements Motor {
     }
 
     @Override
-    public void condicoesDeUso(String condicao) {
-        System.out.println("O Motor está: " + condicao);
+    public void verificarEstadoDoMotor() {
+        System.out.println("O Motor do "+Automovel.CAMINHAO+" está em bom estado ");
     }
 
     @Override

@@ -13,8 +13,8 @@ public class Carro extends Automovel implements Motor{
   }
 
      @Override
-    public void condicoesDeUso(String condicao) {
-        System.out.println("O Motor do "+Automovel.CARRO+" está: "+condicao);
+    public void verificarEstadoDoMotor() {
+        System.out.println("O Motor do "+Automovel.CARRO+" está em bom estado");
     }
     
      @Override
