@@ -22,6 +22,14 @@ public class Venda {
         this.automoveis.add(automovel);
     }
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public List<Automovel> getAutomoveis() {
+        return automoveis;
+    }
+
     public void finalizarCompra() {
         for (Automovel automovel : automoveis) {
             System.out.println(automovel.toString());
@@ -31,6 +39,7 @@ public class Venda {
                 .stream()
                 .mapToInt(Automovel::getPreco)
                 .reduce(0, (subTotal, preco) -> subTotal + preco);
-        System.out.println("Total: "+valorTotal+" R$");
+        System.out.println("---------------------");
+        System.out.println("Total: " + valorTotal + " R$");
     }
 }
