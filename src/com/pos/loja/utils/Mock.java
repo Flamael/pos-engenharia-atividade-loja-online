@@ -13,7 +13,7 @@ import java.util.Random;
 public class Mock {
 
   public static List<Object> automoveis() {
-    List<Object> automoveis = new ArrayList<>();     
+    List<Object> automoveis = new ArrayList<>();   
     automoveis.add(new Caminhao(32002,25523,400,22873,"Purple","hp","Silverado 2500","Diesel",2,34241));
     automoveis.add(new Caminhao(121245,25523,400,22873,"Red","hp","Silver","Gas",2,34241));    
     automoveis.add(new Carro(878,787854,400,4545,"Blue","cv","Corola","Diesel",2));
