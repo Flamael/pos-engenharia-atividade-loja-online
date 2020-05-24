@@ -14,7 +14,7 @@ import java.util.Random;
  */
 public class GeradorDeNumeros {
 
-    public static int getNumeroAleatorio(int tamanhoMaximo) {
+    public static int get(int tamanhoMaximo) {
         return new Random().nextInt(tamanhoMaximo - 1);
     }
 }
